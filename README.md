@@ -1,0 +1,1 @@
+A repository containing single-file C++ programs demonstrating various algorithms.
