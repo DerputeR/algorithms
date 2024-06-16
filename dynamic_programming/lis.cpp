@@ -1,13 +1,14 @@
 #include <iostream>
 #include <vector>
-#include "common.h"
+#include "../common.h"
 
 // Longest Increasing Subsequence (LIS)
 // Given n numbers/chars, the goal is to figure out the length of the LIS
 // of these numbers/chars, then return the actual LIS
 
 /**
- * @brief Dynamic programming step for the LIS algorithm
+ * @brief Dynamic programming step for the LIS algorithm.
+ * Runtime: O(n^2)
  * @tparam a Character type (int or char, or another type that supports comparison operators)
  * @param A Input list of characters
  * @return List of lengths of the LIS that end with the ith character in the input A
@@ -23,7 +24,7 @@ std::vector<int> lis_lengths(const std::vector<a> &A)
         {
             if (A[j] < A[i] && L[i] < 1 + L[j])
             {
-                // L[i] is 1 + the length of the LIS that can have A[i] appended to it
+                // L[i] is 1 + the longest length of the LIS that can have some A[j] appended to it
                 L[i] = 1 + L[j];
             }
         }
@@ -32,7 +33,8 @@ std::vector<int> lis_lengths(const std::vector<a> &A)
 }
 
 /**
- * @brief Return a list containing the characters of the LIS of a given input
+ * @brief Return a list containing the characters of the LIS of a given input.
+ * Runtime: O(n) without recomputing lengths, O(n^2) if so
  * @tparam a Character type (int or char, or another type that supports comparison operators)
  * @param A Input list of characters
  * @param lengths_ptr If lis_lengths was run separately, we can use this result here instead of regenerating it
@@ -79,15 +81,21 @@ std::vector<a> lis(const std::vector<a> &A, const std::vector<a>* lengths_ptr = 
     return lis_vec;
 }
 
-// non-templated version
+/**
+ * @brief Non-templated version of the complete LIS algorithm.
+ * Runtime: O(n^2)
+ * @param A input list of characters/numbers
+ * @return List containing the longest increasing subsequence from `A`
+ */
 std::vector<int> lis(const std::vector<int> &A) {
-    // create list for lengths of LIS ending with a_i
+    /* create list L where each element L[i] 
+    is the length of the LIS ending with A[i] */
     std::vector<int> L(A.size(), 1);
     for (int i = 1; i < A.size(); i++) {
         for (int j = i - 1; j >= 0; j--) {
             if (A[j] < A[i] && L[i] < 1 + L[j]) {
-                // L[i] is 1 + the length of the LIS
-                // that can have A[i] appended to it
+                /* L[i] is 1 + the length of the longest LIS
+                that can have some A[j] appended to it */
                 L[i] = 1 + L[j];
             }
         }
