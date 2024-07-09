@@ -39,6 +39,12 @@ namespace graphs
         std::vector<vertex_id> prev;
     };
 
+    struct scc_results
+    {
+        std::vector<int> component_numbers;
+        adjacency_list metagraph;
+    };
+
     using adjacency_list = std::vector<vertex>;
 
     void swap_vertices(adjacency_list &graph, vertex_id a, vertex_id b);
@@ -64,5 +70,7 @@ namespace graphs
                      int &clock);
         std::vector<visit_times> dfs(adjacency_list &graph);
         bfs_results bfs(adjacency_list &graph, vertex_id start);
+
+        scc_results scc(adjacency_list &graph);
     }
 }

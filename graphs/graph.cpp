@@ -170,6 +170,12 @@ namespace graphs
         {
             return undirected::bfs(graph, start);
         }
+        
+        // todo:
+        scc_results scc(adjacency_list &graph)
+        {
+            return scc_results();
+        }
     }
 }
 
