@@ -73,7 +73,7 @@ namespace graphs
             }
         }
 
-        std::vector<vertex_id> dfs(adjacency_list &graph)
+        dfs_results dfs(adjacency_list &graph)
         {
             std::vector<vertex_id> prev(graph.size(), -1);
             std::vector<bool> visited(graph.size(), false);
@@ -92,14 +92,15 @@ namespace graphs
                     component_number++;
                 }
             }
-            return prev;
+            return dfs_results{component_numbers, prev};
         }
 
-        std::vector<traversal> bfs(adjacency_list &graph, vertex_id start)
+        bfs_results bfs(adjacency_list &graph, vertex_id start)
         {
             std::queue<vertex_id> queue;
-            std::vector<traversal> traversed(graph.size(), {-1, infty});
-            traversed[start].dist = 0;
+            std::vector<float> dist(graph.size(), infty);
+            std::vector<vertex_id> prev(graph.size(), -1);
+            dist[start] = 0;
             queue.push(start);
             while (!queue.empty())
             {
@@ -108,14 +109,15 @@ namespace graphs
                 for (int i = 0; i < graph[u].edges.size(); i++)
                 {
                     vertex_id v = graph[u].edges[i].to;
-                    if (traversed[v].dist == infty)
+                    if (dist[v] == infty)
                     {
                         queue.push(v);
-                        traversed[v].prev = u;
-                        traversed[v].dist = traversed[u].dist + 1;
+                        prev[v] = u;
+                        dist[v] = dist[u] + 1;
                     }
                 }
             }
+            return bfs_results{dist, prev};
         }
     }
 
@@ -164,7 +166,7 @@ namespace graphs
             return timestamps;
         }
 
-        std::vector<traversal> bfs(adjacency_list &graph, vertex_id start)
+        bfs_results bfs(adjacency_list &graph, vertex_id start)
         {
             return undirected::bfs(graph, start);
         }

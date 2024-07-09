@@ -27,10 +27,16 @@ namespace graphs
         friend std::ostream &operator<<(std::ostream &os, const visit_times &vt);
     };
 
-    struct traversal
+    struct dfs_results
     {
-        vertex_id prev;
-        float dist;
+        std::vector<int> component_numbers;
+        std::vector<vertex_id> prev;
+    };
+
+    struct bfs_results
+    {
+        std::vector<float> dist;
+        std::vector<vertex_id> prev;
     };
 
     using adjacency_list = std::vector<vertex>;
@@ -45,8 +51,8 @@ namespace graphs
                      int component_number,
                      std::vector<int> &component_numbers,
                      std::vector<vertex_id> & prev);
-        std::vector<vertex_id> dfs(adjacency_list &graph);
-        std::vector<traversal> bfs(adjacency_list &graph, vertex_id start);
+        dfs_results dfs(adjacency_list &graph);
+        bfs_results bfs(adjacency_list &graph, vertex_id start);
     }
 
     namespace directed
@@ -57,6 +63,6 @@ namespace graphs
                      std::vector<visit_times> &timestamps,
                      int &clock);
         std::vector<visit_times> dfs(adjacency_list &graph);
-        std::vector<traversal> bfs(adjacency_list &graph, vertex_id start);
+        bfs_results bfs(adjacency_list &graph, vertex_id start);
     }
 }
