@@ -16,3 +16,4 @@ struct quat
 };
 
 std::ostream& operator<<(std::ostream& stream, const quat& q);
+vec3 operator*(const quat &q, const vec3 &v);
