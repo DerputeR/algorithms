@@ -46,10 +46,9 @@ int main()
     quat b = quat(90 * DEG_TO_RAD, vec3{1, 0, 0});
     vec3 v_a = vec3{a.x, a.y, a.z};
     vec3 v_b = vec3{b.x, b.y, b.z};
-    std::cout << vec3::cross(v_a, v_b) << "\n";
-    // float expectedW = a.w * b.w - (v_a * v_b);
-    // vec3 expectedV = b.w * v_a + a.w * v_b + vec3::cross(v_a, v_b);
-    // std::cout << "Expected result:" << "(" << expectedW << ", " << expectedV.x << ", " << expectedV.y << ", " << expectedV.z << ")\n";
+    float expectedW = a.w * b.w - (v_a * v_b);
+    vec3 expectedV = b.w * v_a + a.w * v_b + vec3::cross(v_a, v_b);
+    std::cout << "Expected result:" << "(" << expectedW << ", " << expectedV.x << ", " << expectedV.y << ", " << expectedV.z << ")\n";
     std::cout << "Actual result:" << a * b << "\n";
     std::cout << std::endl;
 }

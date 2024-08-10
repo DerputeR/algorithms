@@ -45,13 +45,13 @@ std::ostream& operator<<(std::ostream& stream, const vec3& vec)
     return stream;
 }
 
-int main()
-{
-    vec3 a = vec3{1, 0, 0};
-    vec3 b = vec3{0, 1, 0};
-    std::cout << 2 * b << std::endl;
-    std::cout << a * b << std::endl;
-    std::cout << a + b << std::endl;
-    std::cout << a - b << std::endl;
-    std::cout << vec3::cross(a, b) << std::endl;
-}
+// int main()
+// {
+//     vec3 a = vec3{1, 0, 0};
+//     vec3 b = vec3{0, 1, 0};
+//     std::cout << 2 * b << std::endl;
+//     std::cout << a * b << std::endl;
+//     std::cout << a + b << std::endl;
+//     std::cout << a - b << std::endl;
+//     std::cout << vec3::cross(a, b) << std::endl;
+// }
